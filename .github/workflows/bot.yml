@@ -6,11 +6,15 @@ on:
 
 jobs:
   run-bot:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Preparar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
       - name: Instalar programa
-        run: composer install
+        run: composer install --no-dev
       - name: Ejecutar bot
         env:
           OCI_REGION: ${{ secrets.OCI_REGION }}
